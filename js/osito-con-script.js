@@ -1,6 +1,13 @@
 let card = document.querySelector("#card");
 let audioClip1 = document.querySelector("#audioClip1");
 let audioClip2 = document.querySelector("#audioClip2");
+const images = [];
+for(let i = 1; i <= 6; i++) {
+    const img = new Image();
+    img.src = `/assets/cigueña/ciguena-${i}.svg`;
+    images.push(img);
+}
+
 
 card.addEventListener("mouseover", () => {
   if (audioClip1.paused) {
@@ -21,9 +28,9 @@ let currentDate = new Date();
 let differenceInSeconds = Math.round((dueDate - currentDate) / 1000);
 
 
-document.querySelector(
-  ".progress-bar::before"
-).style.animationDuration = `${differenceInSeconds}s`;
+// document.querySelector(
+//   ".progress-bar::before"
+// ).style.animationDuration = `${differenceInSeconds}s`;
 
 const messages = [
   "La búsqueda del tesoro de Juan y Lily ha comenzado...",
@@ -54,3 +61,13 @@ function changeMessage() {
 
 let messageInterval = differenceInSeconds / messages.length;
 const intervalId = setInterval(changeMessage, messageInterval * 1000);
+
+let frame = 1;
+const stork = document.getElementById('stork');
+
+setInterval(() => {
+  stork.style.backgroundImage = `url('/assets/cigueña/ciguena-${frame}.svg')`;
+  frame = frame < 6 ? frame + 1 : 1;
+}, 190);
+
+
